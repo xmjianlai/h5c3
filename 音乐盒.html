@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+       .box{
+       	height: 300px;
+       	width: 300px;
+       	border: 1px solid blue;
+       	border-radius: 50%;
+       	
+       	position: relative;
+       }
+       .top{
+       	width: 100%;
+       	height: 100%;
+       	background-image: url(images/musicb.jpg);
+       	border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: all 10s linear;
+       }
+       .bottom{
+       	width: 100%;
+       	height: 100%;
+       	background-image: url(images/musict.jpg);
+       	border-radius: 50%;
+       	position: absolute;
+       	left: 0;
+       	top: 0;
+        transform-origin: bottom;
+        transition: all 1s;
+       }
+       .box:hover .bottom{
+       	transform: rotateX(-180deg);
+       }
+        .box:hover .top{
+       	transform: rotateZ(360deg);
+       }
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="top"></div>
+		<div class="bottom"></div>
+	</div>
+	<audio src=""></audio>
+</body>
+</html>

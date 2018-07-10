@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	* {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		.box{
+			width: 600px;
+			height: 200px;
+			border: 1px solid blue;
+			margin: 100px auto;
+			position: relative;
+            overflow: hidden;
+		}
+		.box ul{
+			width: 1800px;
+            position: absolute;
+            left: 0;
+            top: 0;
+           animation: lunbo 10s linear infinite;
+		}
+		@keyframes lunbo{
+			0%{
+				left: 0;
+			}
+			100%{
+				left: -1200px;
+			}
+		}
+		.box:hover ul{
+			animation-play-state: paused;
+		}
+     .box ul li{
+     	float: left;
+     }
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li><a href="#"><img src="image/z1.jpg" alt=""></a></li>
+			<li><a href="#"><img src="image/z2.jpg" alt=""></a></li>
+			<li><a href="#"><img src="image/z3.jpg" alt=""></a></li>
+			<li><a href="#"><img src="image/z4.jpg" alt=""></a></li>
+			<li><a href="#"><img src="image/z1.jpg" alt=""></a></li>
+			<li><a href="#"><img src="image/z2.jpg" alt=""></a></li>
+		</ul>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .box {
+        width: 560px;
+        height: 380px;
+        border: 1px solid #ccc;
+        margin: 100px auto;
+        position: relative;
+    }
+
+    .box ul {
+        width: 20%;
+        height: 380px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all 1s;
+        float: left;
+
+        /* 不要给ul添加overflow 因为这样会让li的3D位置全部无效 */
+    }
+
+    .box ul:nth-child(2) img {
+        margin-left: -100%;
+    }
+
+    .box ul:nth-child(3) img {
+        margin-left: -200%;
+    }
+
+    .box ul:nth-child(4) img {
+        margin-left: -300%;
+    }
+
+    .box ul:nth-child(5) img {
+        margin-left: -400%;
+    }
+
+    .box ul li {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        /* 必须给li添加 */
+        overflow: hidden;
+    }
+
+    .box ul li:nth-child(1) {
+        transform: rotateX(90deg) translateZ(190px);
+    }
+
+    .box ul li:nth-child(2) {
+        transform: rotateX(-90deg) translateZ(190px);
+    }
+
+    .box ul li:nth-child(3) {
+        transform: translateZ(190px);
+    }
+
+    .box ul li:nth-child(4) {
+        transform: rotateX(180deg) translateZ(190px);
+    }
+
+    .box .arrow {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        line-height: 100px;
+        text-decoration: none;
+    }
+
+    .box .arrow-l {
+        left: -100px;
+    }
+
+    .box .arrow-r {
+        right: -100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="images/01.jpg" alt=""></li>
+            <li><img src="images/02.jpg" alt=""></li>
+            <li><img src="images/03.jpg" alt=""></li>
+            <li><img src="images/04.jpg" alt=""></li>
+        </ul>
+        <ul>
+            <li><img src="images/01.jpg" alt=""></li>
+            <li><img src="images/02.jpg" alt=""></li>
+            <li><img src="images/03.jpg" alt=""></li>
+            <li><img src="images/04.jpg" alt=""></li>
+        </ul>
+        <ul>
+            <li><img src="images/01.jpg" alt=""></li>
+            <li><img src="images/02.jpg" alt=""></li>
+            <li><img src="images/03.jpg" alt=""></li>
+            <li><img src="images/04.jpg" alt=""></li>
+        </ul>
+        <ul>
+            <li><img src="images/01.jpg" alt=""></li>
+            <li><img src="images/02.jpg" alt=""></li>
+            <li><img src="images/03.jpg" alt=""></li>
+            <li><img src="images/04.jpg" alt=""></li>
+        </ul>
+        <ul>
+            <li><img src="images/01.jpg" alt=""></li>
+            <li><img src="images/02.jpg" alt=""></li>
+            <li><img src="images/03.jpg" alt=""></li>
+            <li><img src="images/04.jpg" alt=""></li>
+        </ul>
+        <a class="arrow arrow-l" href="#">上一张</a>
+        <a class="arrow arrow-r" href="#">下一张</a>
+    </div>
+    <script>
+
+    // 思路：
+    /*1、制作单张轮播效果
+        构建一个长方体
+        JS里面的旋转是累加的
+    2、制作切割静态布局
+        5个ul排成一排 每个ul负责1/5的图片区域 一张完整的图片由5个ul拼凑而成
+        添加overflow的时候 不要添加给ul  因为会破坏li的3D效果 添加给li元素
+    3、制作切割效果
+        让ul依次过渡  添加对应的延迟时间
+    4、函数节流
+        添加过渡结束事件  当过渡结束的时候让flag还原*/
+
+
+
+    // 获取元素
+    var box = document.querySelector('.box');
+    var ul = box.querySelectorAll('ul');
+    var btn = box.querySelectorAll('a');
+
+    // 计数器
+    var count = 0;
+
+    var flag = true;
+
+    btn[1].onclick = function() {
+
+        if (flag) {
+            flag = false;
+            count++;
+            for (var i = 0; i < ul.length; i++) {
+                ul[i].style.transition = 'all 1s ' + 0.2 * i + 's'
+                ul[i].style.transform = 'rotateX(' + -90 * count + 'deg)';
+            }
+        }
+
+    }
+    btn[0].onclick = function() {
+        if (flag) {
+            flag = false;
+            count--;
+            for (var i = 0; i < ul.length; i++) {
+                ul[i].style.transition = 'all 1s ' + 0.2 * i + 's'
+                ul[i].style.transform = 'rotateX(' + -90 * count + 'deg)';
+            }
+        }
+    }
+
+    ul[ul.length - 1].addEventListener('transitionend',function(){
+        flag = true;
+    })
+    </script>
+</body>
+
+</html>
